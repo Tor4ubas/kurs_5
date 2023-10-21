@@ -81,3 +81,32 @@ class DBManager:
                                 f'\n    url TEXT'
                                 f'\n);\n')
 
+    @staticmethod
+    def save_data_to_database(data: list[dict[str, Any]], database_name: str, table_name: str, params=config()) -> None:
+        """Сохранение данных о вакансиях в базу данных"""
+
+        conn = psycopg2.connect(dbname=database_name, **params)
+
+        info_vacancies = ''
+
+        with conn.cursor() as cur:
+            for vacancy in data:
+                cur.execute(
+                    f"""
+                        INSERT INTO {table_name} (company, title_vacancies, city, salary, url)
+                        VALUES (%s, %s, %s, %s, %s)
+                        """,
+                    (vacancy['company'], vacancy['title'], vacancy['city'],
+                     vacancy['salary_int'], vacancy['url'])
+                )
+                if len(info_vacancies) < 1:
+                    info_vacancies += f"{vacancy['company']}, {vacancy['title']}, {vacancy['city']}, " \
+                                      f"{vacancy['salary_int']}, {vacancy['url']}\n"
+                else:
+                    info_vacancies += f"        {vacancy['company']}, {vacancy['title']}, {vacancy['city']}, " \
+                                      f"{vacancy['salary_int']}, {vacancy['url']}\n"
+
+        ReadWriteToSQL.add_info(f"\nINSERT INTO {table_name} (company, title_vacancies, city, salary, url)"
+                                f"\nVALUES ({info_vacancies});\n")
+        conn.commit()
+        conn.close()
