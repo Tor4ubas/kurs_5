@@ -215,5 +215,32 @@ class DBManager:
         except Exception as error:
             print('Ошибка при работе PostgreSQL', error)
 
+    @staticmethod
+    def get_vacancies_with_keyword(database_name: str, table_name: str, user_query: str, params=config()):
+        """
+        Получает список всех вакансий, в названии которых содержатся переданные в метод слова, например 'python'
+        """
+        try:
+            connection = psycopg2.connect(dbname=database_name, **params)
+            cursor = connection.cursor()
+            postgresql_select_query = f" select * from {table_name} where title_vacancies LIKE '%{user_query}%' "
+            ReadWriteToSQL.add_info(f"\nSELECT *"
+                                    f"\nFROM {table_name}"
+                                    f"\nWHERE title_vacancies LIKE '%{user_query}%';\n")
+
+            cursor.execute(postgresql_select_query)
+            total_vacancies = cursor.fetchall()
+
+            for row in total_vacancies:
+                print(f'\nКомпания - {row[1]},'
+                      f'\nВакансия - {row[2]},'
+                      f'\nЗарплата - {row[4]},'
+                      f'\nСсылка на вакансию - {row[5]}')
+
+            cursor.close()
+            connection.close()
+        except Exception as error:
+            print('Ошибка при работе PostgreSQL', error)
+
 
 
