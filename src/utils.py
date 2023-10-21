@@ -19,3 +19,17 @@ class WorkToUser:
                f"\nЗапрос - {self.request}" \
                f"\nГород - {self.city}" \
                f"\nКоличество вакансий - {self.quantity}"
+
+    def choice_site(self):
+        """
+        Выбирает платформу для поиска вакансий
+        """
+        site_list = ['hh.ru']
+        print(f'\nДля поиска Ваших вакансий выбрана платформа - {site_list[0]}')
+        self.site = site_list[0]
+
+    def get_request(self):
+        """
+        Получает запрос пользователя
+        """
+        self.request = input("\nВведите Ваш зопрос по поиску вакансий: ")
