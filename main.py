@@ -51,3 +51,5 @@ def top_10_vacancies():
         else:
             break
     ReadWriteToJSON.write_json(top_vacancies, file_name='top_vacancies.json',)
+
+
