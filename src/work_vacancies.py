@@ -51,3 +51,4 @@ class VacanciesHH(Vacancies):
         cleantext = re.sub(clean_r, '', raw_html)
         return cleantext
 
+
