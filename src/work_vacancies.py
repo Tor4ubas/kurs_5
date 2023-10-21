@@ -35,3 +35,19 @@ class VacanciesHH(Vacancies):
         self.requirements = f"{self.clean_html(info_requirements)}"
         self.date = self.date_convesion(info['created_at'])
 
+    @staticmethod
+    def date_convesion(data):
+        """
+        Конвертирует дату в читаемый вид
+        :param data: str
+        :return: str
+        """
+        data_format = datetime.datetime.strptime(data, '%Y-%m-%dT%H:%M:%S%z')
+        return f"Дата создания вакансии: {datetime.datetime.strftime(data_format, '%d %B %Y %H:%M:%S %Z')}"
+
+    @staticmethod
+    def clean_html(raw_html):
+        clean_r = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
+        cleantext = re.sub(clean_r, '', raw_html)
+        return cleantext
+
