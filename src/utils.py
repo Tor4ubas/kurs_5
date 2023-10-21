@@ -53,3 +53,10 @@ class WorkToUser:
                     raise ValueError
             except ValueError:
                 print("Некорректный ввод")
+
+    def quantity_vacancies(self):
+        """
+        Получает количество искомых вакансий от пользователя
+        """
+        self.quantity = 100
+        print(f'\nВам будет предтавлен список из {self.quantity} вакансий.')
