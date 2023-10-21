@@ -3,7 +3,7 @@ from typing import Any
 import psycopg2
 
 from src.config import config
-from src.work_file import ReadWriteToSQL
+from src.work import ReadWriteToSQL
 
 
 class DBManager:
