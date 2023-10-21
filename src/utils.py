@@ -1,5 +1,5 @@
 from src.work_api import HeadHunter
-from src.work_file import ReadWriteToJSON
+from src.work import ReadWriteToJSON
 from src.work_vacancies import VacanciesHH
 
 
