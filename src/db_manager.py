@@ -164,3 +164,28 @@ class DBManager:
         except Exception as error:
             print('Ошибка при работе PostgreSQL', error)
 
+    @staticmethod
+    def get_avg_salary(database_name: str, table_name: str, params=config()):
+        """
+        Получает среднюю зарплату по вакансиям
+        """
+        try:
+            connection = psycopg2.connect(dbname=database_name, **params)
+            cursor = connection.cursor()
+            postgresql_select_query = f" select round(avg(salary)) from {table_name} "
+            ReadWriteToSQL.add_info(f"\nSELECT round(AVG(salary))"
+                                    f"\nfrom {table_name};\n")
+
+            cursor.execute(postgresql_select_query)
+            total_vacancies = cursor.fetchall()
+
+            for row in total_vacancies:
+                print(f'\nСредняя зарплата по вакансиям - {row[0]}')
+
+            cursor.close()
+            connection.close()
+        except Exception as error:
+            print('Ошибка при работе PostgreSQL', error)
+
+
+
