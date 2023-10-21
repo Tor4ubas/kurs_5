@@ -33,3 +33,23 @@ class WorkToUser:
         Получает запрос пользователя
         """
         self.request = input("\nВведите Ваш зопрос по поиску вакансий: ")
+
+    def choice_city(self):
+        """
+        Выбирает город для поиска вакансий
+        """
+        city_list = ['Россия', 'Москва', 'Санкт-Петербург']
+        while True:
+            try:
+                choice_user = int(input(
+                    f'\n1 - {city_list[0]}'
+                    f'\n2 - {city_list[1]}'
+                    f'\n3 - {city_list[2]}'
+                    f'\nВыбирите регион для поиска вакансий: '))
+                if choice_user in [1, 2, 3]:
+                    self.city = city_list[choice_user - 1]
+                    break
+                else:
+                    raise ValueError
+            except ValueError:
+                print("Некорректный ввод")
