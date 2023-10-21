@@ -110,3 +110,28 @@ class DBManager:
                                 f"\nVALUES ({info_vacancies});\n")
         conn.commit()
         conn.close()
+
+    @staticmethod
+    def get_companies_and_vacancies_count(database_name: str, table_name, params=config()):
+        """
+        Получает список всех компаний и количество вакансий у каждой компании
+        """
+        try:
+            connection = psycopg2.connect(dbname=database_name, **params)
+            cursor = connection.cursor()
+            postgresql_select_query = f'select company, count(*) from {table_name} group by company'
+            ReadWriteToSQL.add_info(f'\nSELECT company, count(*)'
+                                    f'\nFROM {table_name}'
+                                    f'\nGROUP BY company;\n')
+
+            cursor.execute(postgresql_select_query)
+            total_vacancies = cursor.fetchall()
+
+            print(f'Компания - количество вакансий')
+            for row in total_vacancies:
+                print(f'{row[0]} - {row[1]}')
+
+            cursor.close()
+            connection.close()
+        except Exception as error:
+            print('Ошибка при работе PostgreSQL', error)
