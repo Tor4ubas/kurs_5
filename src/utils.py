@@ -60,3 +60,15 @@ class WorkToUser:
         """
         self.quantity = 100
         print(f'\nВам будет предтавлен список из {self.quantity} вакансий.')
+
+    def work_api(self):
+        """
+        Выполняет работу API по запросу пользователя
+        """
+        total = []
+        city = {'Россия': 113, 'Москва': 1, 'Санкт-Петербург': 2}
+        info = HeadHunter(self.request, self.quantity, city[self.city]).get_info()
+        for item in info:
+            total.append(VacanciesHH(item).__dict__)
+
+        ReadWriteToJSON.write_json(total)
