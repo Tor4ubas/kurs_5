@@ -14,4 +14,14 @@ class WorkApi(ABC):
     def get_info(self):
         pass
 
+class HeadHunter(WorkApi):
+    """Класс для работы с API HeadHunter"""
+
+    url = 'https://api.hh.ru/vacancies'
+
+    def __init__(self, text: str, per_page: int, city: int):
+        self.text = text
+        self.per_page = per_page
+        self.area = city
+
 
