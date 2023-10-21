@@ -24,4 +24,13 @@ class HeadHunter(WorkApi):
         self.per_page = per_page
         self.area = city
 
+    def get_info(self):
+        """
+        Получает список вакансий
+        :return: list
+        """
+        response = requests.get(self.url, params=self.__dict__)
+        info = response.json()['items']
+        return info
+
 
