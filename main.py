@@ -1,16 +1,21 @@
-# This is a sample Python script.
+import textwrap
+from random import shuffle
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from src.db_manager import DBManager
+from src.utils import WorkToUser
+from src.work_file import ReadWriteToJSON
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def get_user(player: WorkToUser):
+    """
+    Выполняет запрос пользователя
+    """
+    player.choice_site()  # выбор ресурса
+    player.get_request()  # запрос
+    player.choice_city()  # Выбор региона для поиска вакансий
+    player.quantity_vacancies()  # Количество вакансий
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    print(f'\n{player}')  # Показывает запрос
+
+    player.work_api()
+
