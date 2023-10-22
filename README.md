@@ -1,7 +1,7 @@
 <h1 align="center">Привет! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="50"></h1>
 
 <h2 align="center">Я, Данилов Александр</h2>
-<h2 align="center">студент онлайн школы SkyPro ⚡</h2>
+<h2 align="center">студент онлайн школы SkyPro </h2>
 <h3 align="center">Представляю Вашему вниманию мою Курсовую работу №5</h3>
 
 ***
@@ -9,11 +9,11 @@
 <h3>Стек технологий:</h3>
 
  - certifi==2023.7.22
- - charset-normalizer==3.2.0
+ - charset-normalizer==3.3.0
  - idna==3.4
- - psycopg2==2.9.6
+ - psycopg2-binary==2.9.9
  - requests==2.31.0
- - urllib3==2.0.4
+ - urllib3==2.0.7
 
 <h3>Для запуска необходимо:</h3>
 
