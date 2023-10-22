@@ -3,7 +3,7 @@ from random import shuffle
 
 from src.db_manager import DBManager
 from src.utils import WorkToUser
-from src.work_file import ReadWriteToJSON
+from src.work import ReadWriteToJSON
 
 
 def get_user(player: WorkToUser):
@@ -134,7 +134,7 @@ def main():
     work_db()
 
     print('\nВсе SQL-запросы Вы можете посмотреть в файле queries.sql')
-    print('\nДо новых встреч!доб')
+    print('\nДо новых встреч!')
 
 
 if __name__ == '__main__':
